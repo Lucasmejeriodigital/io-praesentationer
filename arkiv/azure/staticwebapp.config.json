@@ -1,0 +1,45 @@
+{
+  "routes": [
+    {
+      "route": "/.auth/login/github",
+      "statusCode": 404
+    },
+    {
+      "route": "/.auth/login/twitter",
+      "statusCode": 404
+    },
+    {
+      "route": "/ingen-adgang.html",
+      "allowedRoles": [
+        "authenticated"
+      ]
+    },
+    {
+      "route": "/kunder/test-kunde/*",
+      "allowedRoles": [
+        "io",
+        "kunde-test-kunde"
+      ]
+    },
+    {
+      "route": "/*",
+      "allowedRoles": [
+        "io"
+      ]
+    }
+  ],
+  "responseOverrides": {
+    "401": {
+      "redirect": "/.auth/login/aad?post_login_redirect_uri=.referrer",
+      "statusCode": 302
+    },
+    "403": {
+      "rewrite": "/ingen-adgang.html"
+    }
+  },
+  "globalHeaders": {
+    "X-Robots-Tag": "noindex, nofollow",
+    "Cache-Control": "no-store",
+    "Referrer-Policy": "no-referrer"
+  }
+}
