@@ -1,9 +1,10 @@
 # iO præsentationer
 
-HTML-decks lavet med iO slides-skillen, udgivet gratis på **GitHub Pages** og låst med **kodeord**.
+HTML-decks lavet med iO slides-skillen, udgivet gratis på **GitHub Pages**. Hvert deck er enten **låst med kodeord** (standard) eller **åbent**.
 
-- Repoet og siden er **offentlige**, men decks ligger kun krypteret (AES-256-GCM). Uden kodeordet ser man en login-side og ulæselig data.
-- Hvert deck får et tilfældigt filnavn og sit eget kodeord. Navnet afslører ikke kunden.
+- Repoet og siden er **offentlige**. Låste decks ligger kun krypteret (AES-256-GCM). Uden kodeordet ser man en login-side og ulæselig data.
+- Åbne decks kan ses af alle med linket, og de kan findes i repoet.
+- Hvert deck får et tilfældigt filnavn. Navnet afslører ikke kunden.
 - De ukrypterede decks ligger kun lokalt i `kilder/` og pushes aldrig (`.gitignore`).
 
 ## Udgiv et deck
@@ -12,22 +13,26 @@ HTML-decks lavet med iO slides-skillen, udgivet gratis på **GitHub Pages** og l
 ./udgiv.sh ~/sti/til/deck.html
 ```
 
-Scriptet skriver et link og et kodeord ud, fx:
+Scriptet spørger:
+1. **Skal decket ligge bag kodeord?** Enter betyder ja.
+2. **Kodeord:** skriv dit eget (mindst 12 tegn, skrives to gange og vises ikke), eller tryk Enter for at få et dannet.
 
-```
-Link:    https://lucasmejeriodigital.github.io/io-praesentationer/k7f2x9q4m8.html
-Kodeord: klit-fjord-hus-birk-eg-50
-```
+Til sidst skrives linket ud. Send linket og kodeordet i **to forskellige beskeder**.
 
-Gem kodeordet i din kodeordsmanager. Send linket og kodeordet i **to forskellige beskeder**.
+Vælg på forhånd:
+
+```bash
+./udgiv.sh deck.html --laast     # låst, spørger kun om kodeord
+./udgiv.sh deck.html --aaben     # åbent, beder om bekræftelse
+```
 
 **Opdatér et deck** og behold samme link. Id'et er det tilfældige navn i linket:
 
 ```bash
-./udgiv.sh ~/sti/til/deck.html k7f2x9q4m8
+./udgiv.sh ~/sti/til/deck.html --id k7f2x9q4m8
 ```
 
-Det giver et nyt kodeord. Det gamle virker ikke på den nye version.
+Et låst deck skal have kodeordet igen. Brug samme kodeord, hvis modtagerne skal beholde det, de har.
 
 ## Opsætning (én gang)
 
@@ -42,7 +47,7 @@ Det giver et nyt kodeord. Det gamle virker ikke på den nye version.
 
 ## Forbehold
 
-- **Kodeordet er hele sikkerheden.** Filen er offentlig, så et svagt kodeord kan gættes. Brug det dannede (fem ord + tal).
+- **Kodeordet er hele sikkerheden.** Filen er offentlig, så et svagt kodeord kan gættes. Brug mindst 12 tegn og gerne flere ord, fx `blå-fjord-mandag-kaffe`, eller brug det dannede.
 - **Kan ikke trækkes tilbage.** Har nogen hentet filen, kan de åbne den med kodeordet, også efter den er slettet. Ældre versioner ligger desuden i git-historikken.
 - **Ingen log** over, hvem der har åbnet et deck.
 - Til fortroligt klientmateriale: brug PDF eller en løsning med login (se `arkiv/azure/`).
