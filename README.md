@@ -14,17 +14,30 @@ HTML-decks lavet med iO slides-skillen, udgivet gratis på **GitHub Pages**. Hve
 ```
 
 Scriptet spørger:
-1. **Skal decket ligge bag kodeord?** Enter betyder ja.
-2. **Kodeord:** skriv dit eget (mindst 12 tegn, skrives to gange og vises ikke), eller tryk Enter for at få et dannet.
+1. **Låst eller åben?** Tryk `l` for låst med kodeord (Enter gør det samme) eller `å` for åbent.
+2. **Brug dit standardkodeord?** Spørges kun, hvis du har gemt et. Enter betyder ja.
+3. **Kodeord:** ellers skriver du et (mindst 12 tegn, skrives to gange og vises ikke), eller trykker Enter for at få et dannet. Har du intet standardkodeord, tilbyder scriptet at gemme det, du skriver.
 
 Til sidst skrives linket ud. Send linket og kodeordet i **to forskellige beskeder**.
+
+> **Det tager et par minutter.** GitHub skal udgive ændringen, og det tager typisk 1-3 minutter. Indtil da viser linket den gamle version, eller en 404, hvis decket er nyt. Genindlæs uden cache med `⌘⇧R`, eller åbn linket i et nyt privat vindue. Tjek altid linket, før du sender det videre eller går ind til mødet.
 
 Vælg på forhånd:
 
 ```bash
 ./udgiv.sh deck.html --laast     # låst, spørger kun om kodeord
 ./udgiv.sh deck.html --aaben     # åbent, beder om bekræftelse
+./udgiv.sh deck.html --standard  # låst med standardkodeordet, ingen spørgsmål
 ```
+
+**Standardkodeord** ligger kun i macOS Nøglering, ikke i filer eller git:
+
+```bash
+./udgiv.sh --saet-standard       # sæt eller skift
+./udgiv.sh --slet-standard       # fjern
+```
+
+Et nyt standardkodeord gælder kun decks, der udgives bagefter. Allerede udgivne decks bruger stadig det gamle.
 
 **Opdatér et deck** og behold samme link. Id'et er det tilfældige navn i linket:
 
