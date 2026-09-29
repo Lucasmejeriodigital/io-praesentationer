@@ -123,8 +123,12 @@ fi
 unset KODE KODE2
 
 git add docs
-git commit -q -m "Udgiv deck $ID ($TILSTAND)" -- docs
-git push -q
+if git diff --cached --quiet -- docs; then
+  echo "Decket er uændret i forhold til det udgivne. Intet nyt at committe."
+else
+  git commit -q -m "Udgiv deck $ID ($TILSTAND)" -- docs
+fi
+git push -q || { echo "Push til GitHub fejlede. Decket er gemt lokalt; kør 'git push' i $(pwd)." >&2; exit 1; }
 
 BRUGER=$(git remote get-url origin | sed -E 's#.*github.com[:/]([^/]+)/.*#\1#' | tr 'A-Z' 'a-z')
 REPO=$(basename "$(git remote get-url origin)" .git)
