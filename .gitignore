@@ -5,3 +5,7 @@
 # Ukrypterede decks må aldrig pushes — kun docs/ (krypteret) udgives
 kilder/
 kodeord.txt
+
+# Ukrypterede decks bygget i roden – udgives kun krypteret via udgiv.sh
+/*.html
+/*.pptx
